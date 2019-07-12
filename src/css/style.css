@@ -1,0 +1,59 @@
+/* *********************** */
+/* GENERAL STYLES */
+li {
+  list-style: none; }
+
+/* ***************** */
+* {
+  margin: 0;
+  padding: 0; }
+
+.container {
+  max-width: 1200px; }
+
+#app {
+  width: 80%;
+  height: 400px;
+  display: flex;
+  margin: 10% auto;
+  border: 1px solid lightgray; }
+
+.navbar {
+  width: 20%;
+  height: 100%;
+  background-color: #314158; }
+
+.navbar-menu::before {
+  content: ""; }
+
+nav {
+  width: 200px;
+  padding-top: 5%;
+  display: flex; }
+
+.navbar-gamburger {
+  width: 50px;
+  height: auto;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  color: blue;
+  cursor: pointer;
+  text-align: center; }
+
+.icon-cubes:before {
+  content: "\f1b3";
+  font-family: 'home'; }
+
+/* .icon-down-open-big:before { content: '\e800'; }
+.icon-th-large:before { content: '\e801'; } 
+.icon-list:before { content: '\e802'; }
+.icon-looped-square-interest:before { content: '\e803'; }
+.icon-chart-bar:before { content: '\e804'; }
+.icon-th-list:before { content: '\e805'; }
+.icon-eye:before { content: '\e806'; }
+.icon-sort-name-up:before { content: '\f15d'; } 
+.icon-sort-name-down:before { content: '\f15e'; }
+.icon-cubes:before { content: '\f1b3'; } */
