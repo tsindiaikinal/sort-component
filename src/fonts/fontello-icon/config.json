@@ -49,12 +49,6 @@
       "src": "fontawesome"
     },
     {
-      "uid": "af95ef0ddda80a78828c62d386506433",
-      "css": "cubes",
-      "code": 61875,
-      "src": "fontawesome"
-    },
-    {
       "uid": "ef47651da3866460f27baf85ae234e5c",
       "css": "list",
       "code": 59394,
@@ -65,6 +59,12 @@
       "css": "eye",
       "code": 59398,
       "src": "entypo"
+    },
+    {
+      "uid": "55605ca79a65def1a9c300037ff1d0d5",
+      "css": "paw",
+      "code": 61872,
+      "src": "fontawesome"
     }
   ]
 }

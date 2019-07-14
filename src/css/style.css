@@ -3,57 +3,141 @@
 li {
   list-style: none; }
 
+a {
+  text-decoration: none; }
+
+.navbar__control, .navbar-menu {
+  height: 40px;
+  padding-top: 15px;
+  padding-left: 20px; }
+  .navbar__control:hover, .navbar-menu:hover {
+    background-color: rgba(42, 42, 42, 0.5); }
+
 /* ***************** */
 * {
   margin: 0;
   padding: 0; }
 
+body {
+  font-family: "Montserrat";
+  font-weight: normal; }
+
 .container {
   max-width: 1200px; }
 
 #app {
-  width: 80%;
-  height: 400px;
-  display: flex;
-  margin: 10% auto;
-  border: 1px solid lightgray; }
+  height: 100vh;
+  display: flex; }
 
 .navbar {
-  width: 20%;
+  width: 60px;
   height: 100%;
-  background-color: #314158; }
+  background-color: #314158;
+  box-sizing: border-box;
+  transition: width 0.7s;
+  -webkit-transition: width 0.7s;
+  -moz-transition: width 0.7s;
+  -ms-transition: width 0.7s;
+  -o-transition: width 0.7s; }
+  .navbar__control {
+    display: block;
+    font-family: "Montserrat";
+    text-align: left;
+    color: #dc143c;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s; }
+    .navbar__control::before {
+      margin-right: 10px;
+      content: "\e803";
+      font-family: "home";
+      font-size: 1.2rem; }
+  .navbar__control-title {
+    font-size: 0.875rem;
+    font-weight: 600; }
+  .navbar__control-title {
+    display: none; }
 
 .navbar-menu::before {
-  content: ""; }
+  content: "\e802";
+  font-family: "home"; }
+
+.navbar-menu::after {
+  content: "\e800";
+  margin-left: 18%;
+  font-family: "home";
+  cursor: pointer; }
+
+.menu {
+  display: none;
+  height: 40px; }
+
+.catalog {
+  width: 100%;
+  padding-top: 2%; }
+  .catalog__content {
+    padding-top: 4%; }
 
 nav {
   width: 200px;
-  padding-top: 5%;
+  padding-left: 2%;
   display: flex; }
 
 .navbar-gamburger {
-  width: 50px;
-  height: auto;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #2a2a2a;
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
-  color: blue;
-  cursor: pointer;
-  text-align: center; }
+  transition: transform 0.7s;
+  -webkit-transition: transform 0.7s;
+  -moz-transition: transform 0.7s;
+  -ms-transition: transform 0.7s;
+  -o-transition: transform 0.7s;
+  cursor: pointer; }
 
-.icon-cubes:before {
-  content: "\f1b3";
-  font-family: 'home'; }
+.gamburger-rotate {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg); }
 
-/* .icon-down-open-big:before { content: '\e800'; }
+.icon-paw:before {
+  content: "\f1b0";
+  font-family: "home";
+  font-size: 1.5rem;
+  padding: 5px;
+  overflow: hidden; }
+
+#data-json {
+  margin-left: 2%;
+  border: 1px solid #808080; }
+  #data-json th {
+    padding-left: .5%;
+    text-align: left; }
+  #data-json tr:nth-of-type(even) {
+    background-color: #d3d3d3; }
+  #data-json tr:hover {
+    background-color: #808080;
+    cursor: default; }
+  #data-json td {
+    padding-left: .5%; }
+
+/* .icon-down-open-big:before { content: '\e800'; } 
 .icon-th-large:before { content: '\e801'; } 
-.icon-list:before { content: '\e802'; }
-.icon-looped-square-interest:before { content: '\e803'; }
-.icon-chart-bar:before { content: '\e804'; }
-.icon-th-list:before { content: '\e805'; }
-.icon-eye:before { content: '\e806'; }
-.icon-sort-name-up:before { content: '\f15d'; } 
-.icon-sort-name-down:before { content: '\f15e'; }
-.icon-cubes:before { content: '\f1b3'; } */
+.icon-list:before { content: '\e802'; } 
+.icon-looped-square-interest:before { content: '\e803'; } 
+.icon-chart-bar:before { content: '\e804'; } 
+.icon-th-list:before { content: '\e805'; } 
+.icon-eye:before { content: '\e806'; } 
+.icon-sort-name-up:before { content: '\f15d'; }
+.icon-sort-name-down:before { content: '\f15e'; } 
+.icon-paw:before { content: '\f1b0'; } */

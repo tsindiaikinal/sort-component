@@ -14,10 +14,23 @@
   -o-transform: $param;
   // W3C SHOWS - WARNING: "is an unknown vendor extension"
 }
+@mixin transition($params) {
+  transition: $params;
+  -webkit-transition: $params;
+  -moz-transition: $params;
+  -ms-transition: $params;
+  -o-transition: $params;
+}
 
 //  COLORS
 $navbar: #314158;
+$white: #ffffff;
+$lblack: #2a2a2a;
+$gray: #808080;
+$lgray: #d3d3d3;
+$red: #dc143c;
 // FONTS
+$fontbody: "Montserrat";
 // SIZES
 $maxsize: 1200px;
 /* *********************** */
@@ -25,71 +38,139 @@ $maxsize: 1200px;
 li {
   list-style: none;
 }
+a {
+  text-decoration: none;
+}
+%control-elem {
+  height: 40px;
+  padding-top: 15px;
+  padding-left: 20px;
+  &:hover {
+    background-color: rgba($color: $lblack, $alpha: 0.5);
+  }
+}
 /* ***************** */
 
 * {
   margin: 0;
   padding: 0;
 }
+body {
+  font-family: $fontbody;
+  font-weight: normal;
+}
 .container {
   max-width: $maxsize;
 }
 #app {
-  width: 80%;
-  height: 400px;
+  height: 100vh;
   display: flex;
-  margin: 10% auto;
-  border: 1px solid lightgray;
 }
 .navbar {
-  width: 20%;
+  width: 60px;
   height: 100%;
   background-color: $navbar;
+  box-sizing: border-box;
+  @include transition(width 0.7s);
+  &__control {
+    display: block;
+    font-family: $fontbody;
+    text-align: left;
+    color: $red;
+    @include transition(background-color 0.5s);
+    @extend %control-elem;
+    &::before {
+      margin-right: 10px;
+      content: "\e803";
+      font-family: "home";
+      font-size: 1.2rem;
+    }
+  }
+  &__control-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  &__control-title {
+    display: none;
+  }
 }
 .navbar-menu {
+  @extend %control-elem;
   &::before {
-    content: "";
+    content: "\e802";
+    font-family: "home";
   }
-  &__menu-item {
+  &::after {
+    content: "\e800";
+    margin-left: 18%;
+    font-family: "home";
+    cursor: pointer;
+  }
+}
+.menu {
+  display: none;
+  height: 40px;
+}
+.catalog {
+  width: 100%;
+  padding-top: 2%;
+  &__content {
+    padding-top: 4%;
   }
 }
 nav {
   width: 200px;
-  padding-top: 5%;
+  padding-left: 2%;
   display: flex;
 }
-.navbar-gamburger,
-.routes {
-  // display: inline-block;
-}
-.navbar-gamburger {
-  width: 50px;
-  height: auto;
-  // margin-top: 2%;
-  @include transform(rotate(90deg));
-  color: blue;
-  cursor: pointer;
-  text-align: center;
-  //   background-color: grey;
-}
-.logo {
-}
-// .icon-looped-square-interest:before {
-//   content: "\e803";
-//   font-family: 'home';
-// }
-.icon-cubes:before {
-  content: "\f1b3";
-  font-family: 'home';
-}
 
-/* .icon-down-open-big:before { content: '\e800'; }
+.navbar-gamburger {
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: $lblack;
+  @include transform(rotate(90deg));
+  @include transition(transform 0.7s);
+  cursor: pointer;
+}
+.gamburger-rotate {
+  @include transform(rotate(180deg));
+}
+// .logo {
+// }
+.icon-paw:before {
+  content: "\f1b0";
+  font-family: "home";
+  font-size: 1.5rem;
+  padding: 5px;
+  overflow: hidden;
+}
+#data-json {
+  margin-left: 2%;
+  border: 1px solid $gray;
+  th {
+    padding-left: .5%;
+    text-align: left;
+  }
+  tr:nth-of-type(even) {
+    background-color: $lgray;
+  }
+  tr:hover {
+    background-color: $gray;
+    cursor: default;
+  }
+  td {
+    padding-left: .5%;
+  }
+}
+/* .icon-down-open-big:before { content: '\e800'; } 
 .icon-th-large:before { content: '\e801'; } 
-.icon-list:before { content: '\e802'; }
-.icon-looped-square-interest:before { content: '\e803'; }
-.icon-chart-bar:before { content: '\e804'; }
-.icon-th-list:before { content: '\e805'; }
-.icon-eye:before { content: '\e806'; }
-.icon-sort-name-up:before { content: '\f15d'; } 
-.icon-sort-name-down:before { content: '\f15e'; }
-.icon-cubes:before { content: '\f1b3'; } */
+.icon-list:before { content: '\e802'; } 
+.icon-looped-square-interest:before { content: '\e803'; } 
+.icon-chart-bar:before { content: '\e804'; } 
+.icon-th-list:before { content: '\e805'; } 
+.icon-eye:before { content: '\e806'; } 
+.icon-sort-name-up:before { content: '\f15d'; }
+.icon-sort-name-down:before { content: '\f15e'; } 
+.icon-paw:before { content: '\f1b0'; } */
