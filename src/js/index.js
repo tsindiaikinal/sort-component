@@ -1,61 +1,168 @@
 (function() {
-  console.log("test");
-  $("#gamburger").on("click", function() {
+  // VARIBLES
+  let bigData = [];
+  let displayData;
+  let provider = [];
+  let locationServ = [];
+  let tableHead =
+    '<tr id="table-header">' +
+    "<th>" +
+    '<select class="provider-name">' +
+    provider +
+    "</select>" +
+    "</th>" +
+    '<th id="brands">Brand</th>' +
+    "<th>" +
+    '<select class="location-name">' +
+    locationServ +
+    "</select>" +
+    "</th>" +
+    '<th id="cpu">CPU</th>' +
+    '<th id="drives">Drive</th>' +
+    '<th id="prices">Price</th>' +
+    "</tr>";
+  let select1;
+  let select2;
+  let selectTitle1 = "<option>Provider</option>";
+  let selectTitle2 = "<option>Location</option>";
+  /* ***************** VARIBLES end ********************** */
+  /* NAVBAR */
+  $("#gamburger").on("click", () => {
     $("#gamburger").toggleClass("gamburger-rotate");
-    //   console.log($("#gamburger").hasClass("gamburger-rotate"));
     $(".navbar").css({
       width: "230px"
     });
-    $(".navbar__control-title").show(1000);
-    $(".icon-down-open-big").show(100);
+    if($(".navbar").innerWidth() >= 230) {
+      console.log("test 230px");
+      $(".navbar__menu-container:hover .menu").css({
+        position: "static",
+        display: "",
+        width: "auto"
+      });
+    }
+    if ($(".navbar").innerWidth() >= 60) {
+      // console.log($(".navbar").innerWidth());
+      $(".navbar__menu").css({ width: "100%" });
+      $(".navbar__control-title").toggle(300);
+      $(".navbar__menu-arrow").toggle(300);
+    }
 
     if ($("#gamburger").hasClass("gamburger-rotate") === false) {
       $(".navbar").css({
         width: "60px"
       });
-      $(".navbar__control-title").hide(200);
-      $(".icon-down-open-big").hide();
     }
-    //   console.log("rotate");
   });
-  $.get("json/servers_catalog.json", data => {
-    let displayData;
-    let tableHead =
-      "<tr>" +
-      "<th>Provider</th>" +
-      "<th>Brand</th>" +
-      '<th>Location</th>' +
-      "<th>CPU</th>" +
-      "<th>Drive</th>" +
-      "<th>Price</th>" +
-      "</tr>";
-    for (elem in data.data) {
-      // console.log(data.data[elem]);
-      //  console.log(data[elem]);
+  /* NAVBAR end */
+  $(".navbar__menu").on("click", () => {
+    $(".navbar__menu").toggleClass("active");
+    if ($(".navbar").innerWidth() !== 60) {
+      $(".menu").toggle("slow");
+      // console.log("I am 60");
+    }
+  });
+
+  $("#menu-table").on("click", () => {
+    $("#menu-table").toggleClass("active");
+    //
+    $("#data-json")
+      .html(tableHead + displayData)
+      .toggle();
+  });
+  /* ******************************************* */
+  /* RETRIEVING AND DISPLAYING JSON DATA */
+  $.get("json/servers_catalog.json", function(data) {
+    // console.log(locationServ);
+    for (elems in data.data) {
+      bigData.push(data.data[elems]);
+      provider.push(data.data[elems].provider_name.toLowerCase());
+      locationServ.push(data.data[elems].location.toLowerCase());
+    }
+    bigData.forEach(content => {
       displayData +=
         "<tr>" +
         "<td>" +
-        data.data[elem].provider_name +
+        content.provider_name +
         "</td>" +
         "<td>" +
-        data.data[elem].brand +
+        content.brand +
         "</td>" +
         "<td>" +
-        data.data[elem].location +
+        content.location +
         "</td>" +
         "<td>" +
-        data.data[elem].cpu +
+        content.cpu +
         "</td>" +
         "<td>" +
-        data.data[elem].drive_label +
+        content.drive_label +
         "</td>" +
         "<td>" +
         "$ " +
-        data.data[elem].price +
+        content.price +
         "</td>" +
         "</tr>";
-      // + "<tr>" + "</tr>";
+    });
+  });
+  const writeDataJson = () => {
+    // $("#data-json").html(tableHead + displayData);
+  };
+  // $("#data-json").html(tableHead + displayData);
+  // SORT DROPDOWN DATA
+  provider.sort();
+  locationServ.sort();
+  console.log(provider);
+  /* ********************** */
+  function delRepeatElem(elem) {
+    for (var q = 1, i = 1; q < elem.length; q++) {
+      if (elem[q] !== elem[q - 1]) {
+        elem[i++] = elem[q];
+      }
     }
-    $("#data-json").html(tableHead + displayData);
+    elem.length = i;
+    // console.log(elem);
+    return elem;
+  }
+
+  delRepeatElem(provider).forEach(value => {
+    select1 += "<option>" + value + "</option>";
+  });
+  $(".provider-name").html(selectTitle1 + select1);
+  /* ******************************************** */
+  delRepeatElem(locationServ).forEach(value => {
+    select2 += "<option>" + value + "</option>";
+  });
+  $(".location-name").html(selectTitle2 + select2);
+  // console.log(this);
+  /* RETRIEVING AND DISPLAYING JSON DATA end */
+  $("#table-header th").on("click", event => {
+    // console.log(event);
+    console.log(event.target.id);
+    switch (event.target.id) {
+      case "brands":
+        bigData.sort(function(a, b) {
+          let nameA = a.brand,
+            nameB = b.brand;
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        writeDataJson();
+
+      case "cpu":
+      case "drives":
+      case "prices":
+        console.log("I am child");
+        console.log(bigData);
+        break;
+
+      default:
+        console.log("I am not child");
+        break;
+    }
+    console.log(bigData[0].provider_name);
   });
 })();

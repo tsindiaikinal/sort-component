@@ -15,13 +15,15 @@
           <div class="navbar__control">
             <span class="navbar__control-title">Control</span>
           </div>
-          <div class="navbar-menu">
-              <span>Menu</span>
-              <ul class="menu">
-                <li class="menu__item">1</li>
-                <li class="menu__item">2</li>
-                <li class="menu__item">3</li>
-              </ul>
+          <div class="navbar__menu-container menu-hover" id="menu-container">
+            <div class="navbar__menu">
+              <span class="navbar__menu-arrow">Menu</span>
+            </div>
+            <ul class="menu">
+              <li class="menu__item" id="menu-table">table</li>
+              <li class="menu__item">add</li>
+              <li class="menu__item">settings</li>
+            </ul>
           </div>
         </div>
         <section class="catalog">
@@ -33,11 +35,7 @@
             </div>
           </nav>
           <section class="catalog__content">
-            <table id="data-json">
-              <tr>
-                <td></td>
-              </tr>
-            </table>
+            <table id="data-json"></table>
           </section>
         </section>
       </div>

@@ -39,13 +39,8 @@
 }
 @font-face {
   font-family: 'home';
-  src: url('../fonts/home.eot?33119840');
-  src: url('../fonts/home.eot?33119840#iefix') format('embedded-opentype'),
-       url('../fonts/home.woff2?33119840') format('woff2'),
-       url('../fonts/home.woff?33119840') format('woff'),
-       url('../fonts/home.ttf?33119840') format('truetype'),
-       url('../fonts/home.svg?33119840#home') format('svg');
+  src: url('../fonts/home.woff2?49596909') format('woff2'),
+       url('../fonts/home.woff?49596909') format('woff');
   font-weight: normal;
   font-style: normal;
 }
-
