@@ -30,7 +30,8 @@ body {
 
 #app {
   height: 100vh;
-  display: flex; }
+  display: flex;
+  margin: auto; }
 
 .navbar {
   width: 60px;
@@ -78,13 +79,15 @@ body {
     width: 100%;
     height: 5%;
     padding-right: 5px;
-    position: relative; }
+    position: relative;
+    z-index: 2; }
     .navbar__menu-container:hover .menu {
       display: block;
       width: 160px;
       top: 0;
       left: 100%;
       position: absolute;
+      z-index: 3;
       border-radius: 4px;
       -webkit-border-radius: 4px;
       -moz-border-radius: 4px;
@@ -129,18 +132,26 @@ body {
 
 .catalog {
   width: 100%;
-  padding-top: 2%; }
+  padding-top: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: 2%;
+  overflow: hidden; }
   .catalog__content {
-    padding-top: 4%; }
+    width: 100%;
+    height: 90%;
+    overflow-x: auto; }
 
 nav {
-  width: 200px;
-  padding-left: 2%;
-  display: flex; }
+  height: 35px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between; }
 
 .navbar-gamburger {
   width: 30px;
   height: 30px;
+  display: inline-block;
   font-size: 1.5rem;
   text-align: center;
   color: #2a2a2a;
@@ -167,41 +178,89 @@ nav {
   content: "\f1b0";
   font-family: "home";
   font-size: 1.5rem;
-  padding: 5px;
-  overflow: hidden; }
+  padding: 5px; }
+
+.routes {
+  display: inline-block; }
+  .routes__home {
+    font-size: 0.875rem; }
+
+.nav-container-1 {
+  width: 40%; }
+
+.nav-container-2 {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .nav-container-2 button {
+    width: 80px;
+    height: 30px;
+    margin: 1%;
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    background-color: #2a2a2a;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    cursor: pointer; }
+    .nav-container-2 button:hover {
+      color: #dc143c; }
 
 #data-json {
   display: none;
   width: 100%;
-  margin-left: 2%;
+  min-width: 768px;
   border: 1px solid #808080; }
-  #data-json th {
-    padding-left: 0.5%;
-    padding-right: 0.5%;
-    text-align: left;
-    line-height: 2;
-    cursor: pointer;
-    color: #ffffff;
-    background-color: #2a2a2a; }
   #data-json tr:nth-of-type(odd) {
     background-color: #d3d3d3; }
   #data-json tr:hover {
     background-color: #808080;
     cursor: default; }
+  #data-json th {
+    width: auto;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    text-align: left;
+    line-height: 2;
+    font-size: 1.2vw;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #2a2a2a; }
+    #data-json th:last-of-type {
+      width: 7%; }
+    #data-json th .icon-sort-name {
+      display: inline-block;
+      transition: transform 0.3s;
+      -webkit-transition: transform 0.3s;
+      -moz-transition: transform 0.3s;
+      -ms-transition: transform 0.3s;
+      -o-transition: transform 0.3s;
+      text-align: center;
+      font-style: normal; }
+    #data-json th:hover {
+      color: #dc143c; }
   #data-json td {
     padding-left: 0.5%;
     padding-right: 0.5%;
     line-height: 1.5;
-    font-size: 0.875rem; }
+    font-size: 1.2vw; }
+  #data-json td:nth-of-type(6)::before {
+    content: '$ '; }
   #data-json select {
     width: 100%;
     border: none;
     text-transform: capitalize;
     background-color: #2a2a2a;
-    font-size: 1rem;
+    font-size: 1.2vw;
     font-weight: bold;
     color: #ffffff;
     cursor: pointer; }
+    #data-json select:hover {
+      color: #dc143c; }
     #data-json select option {
       width: 90%; }
 

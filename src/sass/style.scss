@@ -33,6 +33,7 @@ $blue: #4169e1;
 $red: #dc143c;
 // FONTS
 $fontbody: "Montserrat";
+$ficon: "home";
 // SIZES
 $maxsize: 1200px;
 /* *********************** */
@@ -71,6 +72,7 @@ body {
 #app {
   height: 100vh;
   display: flex;
+  margin: auto;
 }
 .navbar {
   width: 60px;
@@ -86,7 +88,7 @@ body {
     &::before {
       margin-right: 10px;
       content: "\e803";
-      font-family: "home";
+      font-family: $ficon;
       font-size: 1.2rem;
       text-shadow: 1px 1px 3px rgba($color: $black, $alpha: 0.7);
     }
@@ -108,7 +110,7 @@ body {
   &::before {
     margin-right: 10px;
     content: "\e802";
-    font-family: "home";
+    font-family: $ficon;
     text-shadow: 1px 1px 1px rgba($color: $white, $alpha: 0.7),
       1px 1px 3px rgba($color: $black, $alpha: 0.7);
     &:enabled {
@@ -122,12 +124,14 @@ body {
   height: 5%;
   padding-right: 5px;
   position: relative;
+  z-index: 2;
   &:hover .menu {
     display: block;
     width: 160px;
     top: 0;
     left: 100%;
     position: absolute;
+    z-index: 3;
     @include radius(4px);
     overflow: hidden;
   }
@@ -139,7 +143,7 @@ body {
     &::after {
       content: "\e800";
       margin-left: 18%;
-      font-family: "home";
+      font-family: $ficon;
     }
   }
 }
@@ -159,7 +163,7 @@ body {
   &__item:nth-child(1)::before,
   &__item:nth-child(2)::before,
   &__item:nth-child(3)::before {
-    font-family: "home";
+    font-family: $ficon;
     margin-right: 5%;
     margin-left: 2%;
     color: $blue;
@@ -176,20 +180,30 @@ body {
 }
 .catalog {
   width: 100%;
-  padding-top: 2%;
+  padding-top: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: 2%;
+  overflow: hidden;
   &__content {
-    padding-top: 4%;
+    width: 100%;
+    height: 90%;
+    // position: relative;
+    // z-index: 1;
+    overflow-x: auto;
   }
 }
 nav {
-  width: 200px;
-  padding-left: 2%;
+  height: 35px;
+  margin-bottom: 20px;
   display: flex;
+  justify-content: space-between;
 }
 
 .navbar-gamburger {
   width: 30px;
   height: 30px;
+  display: inline-block;
   font-size: 1.5rem;
   text-align: center;
   color: $lblack;
@@ -200,29 +214,51 @@ nav {
 .gamburger-rotate {
   @include transform(rotate(180deg));
 }
-// .logo {
-// }
+
 .icon-paw:before {
   content: "\f1b0";
-  font-family: "home";
+  font-family: $ficon;
   font-size: 1.5rem;
   padding: 5px;
-  overflow: hidden;
 }
+
+.routes {
+  display: inline-block;
+  &__home {
+    font-size: (14 / 16) + rem;
+  }
+}
+
+.nav-container-1 {
+  width: 40%;
+}
+
+.nav-container-2 {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  button {
+    width: 80px;
+    height: 30px;
+    margin: 1%;
+    border: 1px solid $lblack;
+    @include radius(2px);
+    background-color: $lblack;
+    box-shadow: 0 1px 5px rgba($color: $black, $alpha: 0.5);
+    color: $white;
+    cursor: pointer;
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
 #data-json {
   display: none;
   width: 100%;
-  margin-left: 2%;
+  min-width: 768px;
   border: 1px solid $gray;
-  th {
-    padding-left: 0.5%;
-    padding-right: 0.5%;
-    text-align: left;
-    line-height: 2;
-    cursor: pointer;
-    color: $white;
-    background-color: $lblack;
-  }
   tr:nth-of-type(odd) {
     background-color: $lgray;
   }
@@ -230,26 +266,51 @@ nav {
     background-color: $gray;
     cursor: default;
   }
-  // td:first-of-type {
-  //   text-transform: capitalize;
-  // }
+  th {
+    width: auto;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    text-align: left;
+    line-height: 2;
+    font-size: 1.2vw;
+    cursor: pointer;
+    color: $white;
+    background-color: $lblack;
+    &:last-of-type {
+      width: 7%;
+    }
+    .icon-sort-name {
+      display: inline-block;
+      @include transition(transform .3s);
+      text-align: center;
+     font-style: normal;
+    }
+    &:hover {
+      color: $red;
+    }
+  }
   td {
-    // max-width: 70%;
     padding-left: 0.5%;
     padding-right: 0.5%;
     line-height: 1.5;
-    // box-sizing: border-box;
-    font-size: (14 / 16) + rem;
+    // font-size: (14 / 16) + rem;
+    font-size: 1.2vw;
+  }
+  td:nth-of-type(6)::before {
+    content: '$ ';
   }
   select {
     width: 100%;
     border: none;
     text-transform: capitalize;
     background-color: $lblack;
-    font-size: 1rem;
+    font-size: 1.2vw;
     font-weight: bold;
     color: $white;
     cursor: pointer;
+    &:hover {
+      color: $red;
+    }
     option {
       width: 90%;
     }
