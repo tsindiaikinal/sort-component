@@ -26,7 +26,7 @@ body {
   font-weight: normal; }
 
 .container {
-  max-width: 1200px; }
+  max-width: 1920px; }
 
 #app {
   height: 100vh;
@@ -136,15 +136,13 @@ body {
   padding-left: 2%;
   padding-right: 2%;
   margin-bottom: 2%;
-  overflow: hidden; }
+  overflow-y: auto; }
   .catalog__content {
     width: 100%;
-    height: 90%;
     overflow-x: auto; }
 
 nav {
   height: 35px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: space-between; }
 
@@ -186,17 +184,18 @@ nav {
     font-size: 0.875rem; }
 
 .nav-container-1 {
-  width: 40%; }
+  width: 30%; }
 
 .nav-container-2 {
   width: 25%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-wrap: wrap; }
   .nav-container-2 button {
     width: 80px;
     height: 30px;
     margin: 1%;
+    display: none;
     border: 1px solid #2a2a2a;
     border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -210,11 +209,36 @@ nav {
     .nav-container-2 button:hover {
       color: #dc143c; }
 
+button.disabled {
+  border: none;
+  background-color: rgba(128, 128, 128, 0.3);
+  box-shadow: none;
+  cursor: not-allowed; }
+  button.disabled:hover {
+    color: #ffffff; }
+
+#pagination-container {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.7rem; }
+  #pagination-container span {
+    width: 15px;
+    height: 15px;
+    margin: 1px;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+    display: inline-block;
+    vertical-align: middle; }
+
 #data-json {
   display: none;
   width: 100%;
   min-width: 768px;
+  margin-top: 30px;
   border: 1px solid #808080; }
+  #data-json tr {
+    height: 34px; }
   #data-json tr:nth-of-type(odd) {
     background-color: #d3d3d3; }
   #data-json tr:hover {
@@ -245,11 +269,11 @@ nav {
       color: #dc143c; }
   #data-json td {
     padding-left: 0.5%;
-    padding-right: 0.5%;
+    padding-right: 1%;
     line-height: 1.5;
     font-size: 1.2vw; }
   #data-json td:nth-of-type(6)::before {
-    content: '$ '; }
+    content: "$ "; }
   #data-json select {
     width: 100%;
     border: none;
@@ -263,18 +287,3 @@ nav {
       color: #dc143c; }
     #data-json select option {
       width: 90%; }
-
-/* .icon-down-open-big:before { content: '\e800'; }
-.icon-th-large:before { content: '\e801'; } 
-.icon-list:before { content: '\e802'; } 
-.icon-looped-square-interest:before { content: '\e803'; } 
-.icon-chart-bar:before { content: '\e804'; } 
-.icon-th-list:before { content: '\e805'; }
-.icon-eye:before { content: '\e806'; }
-.icon-cog-outline:before { content: '\e807'; }
-.icon-grid:before { content: '\e808'; }
-.icon-table:before { content: '\f0ce'; } 
-.icon-list-add:before { content: '\e809'; }
-.icon-sort-name-up:before { content: '\f15d'; }
-.icon-sort-name-down:before { content: '\f15e'; }
-.icon-paw:before { content: '\f1b0'; } */

@@ -45,7 +45,7 @@ const serv = () => {
 const babeltr = () => {
   return (
     src([
-      "src/**/jquery-3.3.1.min.js",
+      "src/**/jquery*.min.js",
       "src/**/jquery-migrate-1.4.1.min.js",
       "src/**/slick.min.js",
       "src/**/index.js"
@@ -75,7 +75,7 @@ const cssminim = () => {
       src([
       "src/css/fontface.css", 
       "src/css/style.css",
-      "src/css/media.css"
+      //"src/css/media.css"
       ])
       .pipe(csso())
       .pipe(concat("style.css"))
@@ -87,6 +87,8 @@ const copy = () => {
   return (
     src("src/**/*.html").pipe(dest("dist")) &&
     src("src/fonts/*").pipe(dest("dist/fonts")) &&
+    src ("src/img/*").pipe(dest("dist/img")) &&
+    src ("src/json/*").pipe(dest("dist/json")) &&
     src("src/webfonts/*").pipe(dest("dist/webfonts/"))
   );
 };

@@ -13,22 +13,77 @@
     provider +
     "</select>" +
     "</th>" +
-    '<th id="brands">Brand<i class="icon-sort-name"> ⇧</i></th>' +
+    '<th id="brands">Brand<i class="icon-sort-name">&nbsp;⇧</i></th>' +
     "<th>" +
     '<select class="location-name" id="location-serv">' +
     locationServ +
     "</select>" +
     "</th>" +
-    '<th id="cpu">CPU<i class="icon-sort-name"> ⇧</i></th>' +
-    '<th id="drives">Drive<i class="icon-sort-name"> ⇧</i></th>' +
-    '<th id="prices">Price<i class="icon-sort-name"> ⇧</i></th>' +
+    '<th id="cpu">CPU<i class="icon-sort-name">&nbsp;⇧</i></th>' +
+    '<th id="drives">Drive<i class="icon-sort-name">&nbsp;⇧</i></th>' +
+    '<th id="prices">Price<i class="icon-sort-name">&nbsp;⇧</i></th>' +
     "</tr>";
   let select1;
   let select2;
   let selectTitle1 = "<option>Provider</option>";
   let selectTitle2 = "<option>Location</option>";
   /* ***************** VARIBLES end ********************** */
-  /* NAVBAR */
+
+  /* ******************************************* */
+  /* RETRIEVING AND DISPLAYING JSON DATA */
+  $.getJSON("json/servers_catalog.json", function(data) {
+    // console.log(locationServ);
+    $.each(data.data, elems => {
+      bigData.push(data.data[elems]);
+      provider.push(data.data[elems].provider_name.toLowerCase());
+      locationServ.push(data.data[elems].location.toLowerCase());
+    });
+    // SORT DROPDOWN DATA
+    provider.sort();
+    locationServ.sort();
+    // ******************
+    bigData.forEach((content, index) => {
+      displayData +=
+        "<tr>" +
+        "<td>" +
+        content.provider_name +
+        "</td>" +
+        "<td>" +
+        content.brand +
+        "</td>" +
+        "<td>" +
+        content.location +
+        "</td>" +
+        "<td>" +
+        content.cpu +
+        "</td>" +
+        "<td>" +
+        content.drive_label +
+        "</td>" +
+        "<td>" +
+        content.price +
+        "</td>" +
+        "</tr>";
+    });
+    $("#data-json").html(tableHead + displayData);
+
+    delRepeatElem(provider).forEach(value => {
+      select1 += "<option>" + value + "</option>";
+    });
+    $(".provider-name").html(selectTitle1 + select1);
+    /* ******************************************** */
+    delRepeatElem(locationServ).forEach(value => {
+      select2 += "<option>" + value + "</option>";
+    });
+    $(".location-name").html(selectTitle2 + select2);
+    /* ********************** */
+  }).fail(function(jqxhr, textStatus, error) {
+    var err = textStatus + ", " + error;
+    console.log("Request Failed: " + err);
+  });
+  /* ---------------- RETRIEVING AND DISPLAYING JSON DATA end ------------- */
+
+  /* ------------------- NAVBAR -------------------------- */
   $("#gamburger").on("click", () => {
     $("#gamburger").toggleClass("gamburger-rotate");
     $(".navbar").css({
@@ -54,74 +109,25 @@
       });
     }
   });
-  /* NAVBAR end */
+
   $(".navbar__menu").on("click", () => {
     $(".navbar__menu").toggleClass("active");
     if ($(".navbar").innerWidth() !== 60) {
       $(".menu").toggle("slow");
-      // console.log("I am 60");
     }
   });
-  /* ******************************************* */
-  /* RETRIEVING AND DISPLAYING JSON DATA */
-  $.getJSON("json/servers_catalog.json", function(data) {
-    // console.log(locationServ);
-    $.each(data.data, elems => {
-      bigData.push(data.data[elems]);
-      provider.push(data.data[elems].provider_name.toLowerCase());
-      locationServ.push(data.data[elems].location.toLowerCase());
-    });
-    // SORT DROPDOWN DATA
-    provider.sort();
-    locationServ.sort();
-    /* ********************** */
-  }).fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-  });
+  /* -------------------- NAVBAR end ------------------------- */
 
   $("#menu-table").on("click", () => {
-    $("#menu-table").toggleClass("active");
-    bigData.forEach(content => {
-      displayData +=
-        "<tr>" +
-        "<td>" +
-        content.provider_name +
-        "</td>" +
-        "<td>" +
-        content.brand +
-        "</td>" +
-        "<td>" +
-        content.location +
-        "</td>" +
-        "<td>" +
-        content.cpu +
-        "</td>" +
-        "<td>" +
-        content.drive_label +
-        "</td>" +
-        "<td>" +
-        content.price +
-        "</td>" +
-        "</tr>";
-    });
-    $("#data-json")
-      .html(tableHead + displayData)
-      .toggle();
-    delRepeatElem(provider).forEach(value => {
-      select1 += "<option>" + value + "</option>";
-    });
-    $(".provider-name").html(selectTitle1 + select1);
-    /* ******************************************** */
-    delRepeatElem(locationServ).forEach(value => {
-      select2 += "<option>" + value + "</option>";
-    });
-    $(".location-name").html(selectTitle2 + select2);
-    /* ********************************************** */
-    // Heandler "click" on a table header
+    $(this).toggleClass("active");
+    $("#data-json").toggle();
+    $(".nav-container-2 button").toggle();
+    $("tr:nth-of-type(n+22)").hide();
+
+    /* ----- Heandler "click" on a table header ----- */
     $("#table-header th").on("click", event => {
       upDown = !upDown;
-      console.log(event.target.id);
+      // console.log(event.target.id);
       switch (event.target.id) {
         case "provider":
           sortProvider();
@@ -146,20 +152,25 @@
           break;
       }
     });
+    let prev = $("#prev");
+    let next = $("#next");
+    next.on("click", event => {
+      pagination();
+    });
   });
-  function delRepeatElem(elem) {
+  /* ********************************************* */
+
+  /* ******** SORTING FUNTIONS ******** */
+  const delRepeatElem = elem => {
     for (var q = 1, i = 1; q < elem.length; q++) {
       if (elem[q] !== elem[q - 1]) {
         elem[i++] = elem[q];
       }
     }
     elem.length = i;
-    // console.log(elem);
     return elem;
-  }
-  /* RETRIEVING AND DISPLAYING JSON DATA end */
-  /* ********************************************* */
-  /* ******** SORTING FUNTIONS ******** */
+  };
+
   const sortProvider = () => {
     let selectValue = $("#provider").val();
     if ($("#location-serv").val() !== "Location") {
@@ -190,9 +201,9 @@
       dataJsonTable
         .find("tr:nth-of-type(n+2)")
         .sort(function(alpha, omega) {
-          return $("td:nth-of-type(2)", omega)
+          return $("td:nth-of-type(2)", alpha)
             .text()
-            .localeCompare($("td:nth-of-type(2)", alpha).text());
+            .localeCompare($("td:nth-of-type(2)", omega).text());
         })
         .appendTo(dataJsonTable);
     } else {
@@ -202,9 +213,9 @@
       dataJsonTable
         .find("tr:nth-of-type(n+2)")
         .sort(function(alpha, omega) {
-          return $("td:nth-of-type(2)", alpha)
+          return $("td:nth-of-type(2)", omega)
             .text()
-            .localeCompare($("td:nth-of-type(2)", omega).text());
+            .localeCompare($("td:nth-of-type(2)", alpha).text());
         })
         .appendTo(dataJsonTable);
     }
@@ -275,9 +286,18 @@
       dataJsonTable
         .find("tr:nth-of-type(n+2)")
         .sort(function(alpha, omega) {
-          return $("td:nth-of-type(5)", omega)
-            .text()
-            .localeCompare($("td:nth-of-type(5)", alpha).text());
+          return parseInt(
+            $(alpha)
+              .find("td:nth-of-type(5)")
+              .text()
+          ) >
+            parseInt(
+              $(omega)
+                .find("td:nth-of-type(5)")
+                .text()
+            )
+            ? 1
+            : -1;
         })
         .appendTo(dataJsonTable);
     } else {
@@ -287,9 +307,18 @@
       dataJsonTable
         .find("tr:nth-of-type(n+2)")
         .sort(function(alpha, omega) {
-          return $("td:nth-of-type(5)", alpha)
-            .text()
-            .localeCompare($("td:nth-of-type(5)", omega).text());
+          return parseInt(
+            $(omega)
+              .find("td:nth-of-type(5)")
+              .text()
+          ) >
+            parseInt(
+              $(alpha)
+                .find("td:nth-of-type(5)")
+                .text()
+            )
+            ? 1
+            : -1;
         })
         .appendTo(dataJsonTable);
     }
@@ -337,4 +366,26 @@
         .appendTo(dataJsonTable);
     }
   };
+  /* --------- SORTING FUNTIONS end ----------- */
+
+  /* --------------- PAGINATION ---------------- */
+  // console.log(pages);
+  let pagination = e => {
+    let sumElem;
+    let counter = 0;
+    let pages = "";
+    $("#data-json")
+      .find("tr:nth-of-type(n+2)")
+      .each(function(index) {
+        sumElem = index;
+        if (index % 20 === 0) {
+          counter = counter + 1;
+          pages += "<span><a href=\"#\">" + counter + "</a></span>";
+          $("#pagination-container").html(pages);
+        }
+      });
+    console.log(sumElem / 20);
+    console.log(counter);
+  };
+  /* **************************** */
 })();
